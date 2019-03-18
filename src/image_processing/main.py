@@ -12,6 +12,9 @@ from src.proto.ImageProcessRequest_pb2_grpc import (
 )
 from src.proto.ImageProcessRequest_pb2 import Image
 import src.image_processing.processing as processing
+from src.image_processing.hearbeat import make_heartbeat
+
+SERVER_PORT = "[::]:50051"
 
 
 class Servicer(ImageProcessingServicer):
@@ -27,11 +30,12 @@ def serve():
 
     server = grpc.server(concurrent.futures.ThreadPoolExecutor(max_workers=10))
     add_ImageProcessingServicer_to_server(Servicer(), server)
-    server.add_insecure_port("[::]:50051")
+    server.add_insecure_port(SERVER_PORT)
     server.start()
     try:
         while True:
-            time.sleep(1)
+            make_heartbeat(SERVER_PORT)
+            time.sleep(3)
     except KeyboardInterrupt:
         server.stop(0)
 
