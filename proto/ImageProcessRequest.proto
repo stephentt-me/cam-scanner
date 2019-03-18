@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+service ImageProcessing {
+    rpc ScanningDocument (Image) returns (Image) {}
+}
+
+message Image {
+    bytes image = 1;
+}

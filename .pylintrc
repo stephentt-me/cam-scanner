@@ -1,0 +1,6 @@
+[MASTER]
+init-hook='import sys; sys.path.append("src")'
+extension-pkg-whitelist=cv2
+
+[MESSAGES CONTROL]
+disable=unused-import,unused-variable,missing-docstring,invalid-name,logging-format-interpolation
