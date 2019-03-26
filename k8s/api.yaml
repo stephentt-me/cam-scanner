@@ -6,11 +6,11 @@ metadata:
 spec:
   selector:
     name: cam-scanner-api
+  type: LoadBalancer
   ports:
     - name: http
       port: 80
       targetPort: 5000
-  # clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: cam-scanner-api
-          image: asia.gcr.io/stephen-f52d1/cs-api:1553572080
+          image: asia.gcr.io/stephen-f52d1/cs-api:1553580267
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
