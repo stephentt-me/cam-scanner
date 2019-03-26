@@ -2,7 +2,12 @@ import io
 
 import grpc
 from flask import Blueprint, request, send_file, render_template, jsonify
-from voluptuous import Schema as HTTPSchema, Invalid as SchemaInvalid, ALLOW_EXTRA, Required
+from voluptuous import (
+    Schema as HTTPSchema,
+    Invalid as SchemaInvalid,
+    ALLOW_EXTRA,
+    Required,
+)
 
 from proto.ImageProcessRequest_pb2_grpc import ImageProcessingStub
 from proto.ImageProcessRequest_pb2 import Image
@@ -17,7 +22,9 @@ def index():
 
 
 def call_external_image_processing(image_buf):
-    channel = grpc.insecure_channel(service_discovery("IMAGE_PROCESSING_SERVICE", "cam-scanner-ip-service"))
+    channel = grpc.insecure_channel(
+        service_discovery("IMAGE_PROCESSING_SERVICE", "cam-scanner-ip-service", "50051")
+    )
     stub = ImageProcessingStub(channel)
     res_image = stub.ScanningDocument(Image(image=image_buf))
     return res_image.image
