@@ -11,6 +11,7 @@ grpcio = "^1.19"
 numpy = "^1.16"
 grpcio-tools = "^1.19"
 python-dotenv = "^0.10.1"
+grpcio-reflection = "^1.19"
 
 [tool.poetry.dev-dependencies]
 

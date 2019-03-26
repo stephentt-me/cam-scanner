@@ -3,16 +3,15 @@ import time
 import concurrent.futures
 
 import grpc
-
 import cv2
+from grpc_reflection.v1alpha import reflection
 
 from proto.ImageProcessRequest_pb2_grpc import (
     ImageProcessingServicer,
     add_ImageProcessingServicer_to_server,
 )
-from proto.ImageProcessRequest_pb2 import Image
+from proto.ImageProcessRequest_pb2 import Image, DESCRIPTOR
 import src.processing as processing
-# from src.hearbeat import make_heartbeat
 
 SERVER_PORT = "[::]:50051"
 
@@ -30,6 +29,12 @@ def serve():
 
     server = grpc.server(concurrent.futures.ThreadPoolExecutor(max_workers=10))
     add_ImageProcessingServicer_to_server(Servicer(), server)
+    # Enable server reflection
+    SERVICE_NAMES = (
+        DESCRIPTOR.services_by_name['ImageProcessing'].full_name,
+        reflection.SERVICE_NAME,
+    )
+    reflection.enable_server_reflection(SERVICE_NAMES, server)
     server.add_insecure_port(SERVER_PORT)
     server.start()
     try:
