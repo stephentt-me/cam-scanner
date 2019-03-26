@@ -6,6 +6,7 @@ from voluptuous import Schema as HTTPSchema, Invalid as SchemaInvalid, ALLOW_EXT
 
 from proto.ImageProcessRequest_pb2_grpc import ImageProcessingStub
 from proto.ImageProcessRequest_pb2 import Image
+from src.system.discovery import service_discovery
 
 bp = Blueprint(__name__, "index")
 
@@ -16,7 +17,7 @@ def index():
 
 
 def call_external_image_processing(image_buf):
-    channel = grpc.insecure_channel("localhost:50051")
+    channel = grpc.insecure_channel(service_discovery("IMAGE_PROCESSING_SERVICE", "cam-scanner-ip-service"))
     stub = ImageProcessingStub(channel)
     res_image = stub.ScanningDocument(Image(image=image_buf))
     return res_image.image

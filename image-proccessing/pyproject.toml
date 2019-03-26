@@ -9,8 +9,8 @@ python = "^3.7"
 opencv-python = "^4.0"
 grpcio = "^1.19"
 numpy = "^1.16"
-python-etcd = "^0.4.5"
 grpcio-tools = "^1.19"
+python-dotenv = "^0.10.1"
 
 [tool.poetry.dev-dependencies]
 
