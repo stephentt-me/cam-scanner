@@ -7,8 +7,8 @@ spec:
   selector:
     name: cam-scanner-ip
   ports:
-    - name: http
-      port: 80
+    - protocol: TCP
+      port: 50051
       targetPort: 50051
   # clusterIP: None
 ---
@@ -29,9 +29,8 @@ spec:
     spec:
       containers:
         - name: cam-scanner-ip
-          image: asia.gcr.io/stephen-f52d1/cs-ip:1553572080
+          image: asia.gcr.io/stephen-f52d1/cs-ip:1553580267
           imagePullPolicy: Always
           ports:
             - containerPort: 50051
-              name: http
               protocol: TCP
