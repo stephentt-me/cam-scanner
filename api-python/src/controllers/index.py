@@ -4,9 +4,8 @@ import grpc
 from flask import Blueprint, request, send_file, render_template, jsonify
 from voluptuous import Schema as HTTPSchema, Invalid as SchemaInvalid, ALLOW_EXTRA, Required
 
-from src.proto.ImageProcessRequest_pb2_grpc import ImageProcessingStub
-from src.proto.ImageProcessRequest_pb2 import Image
-from src.web.service_discovery import discovery
+from proto.ImageProcessRequest_pb2_grpc import ImageProcessingStub
+from proto.ImageProcessRequest_pb2 import Image
 
 bp = Blueprint(__name__, "index")
 
@@ -17,7 +16,7 @@ def index():
 
 
 def call_external_image_processing(image_buf):
-    channel = grpc.insecure_channel(discovery("image_processing"))
+    channel = grpc.insecure_channel("localhost:50051")
     stub = ImageProcessingStub(channel)
     res_image = stub.ScanningDocument(Image(image=image_buf))
     return res_image.image

@@ -1,0 +1,37 @@
+# cam-scanner-api-service.default.svc.cluster.local
+apiVersion: v1
+kind: Service
+metadata:
+  name: cam-scanner-ip-service
+spec:
+  selector:
+    name: cam-scanner-ip
+  ports:
+    - name: http
+      port: 80
+      targetPort: 50051
+  # clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cam-scanner-ip-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: cam-scanner-ip
+  template:
+    metadata:
+      labels:
+        app: cam-scanner
+        name: cam-scanner-ip
+    spec:
+      containers:
+        - name: cam-scanner-ip
+          image: asia.gcr.io/stephen-f52d1/cs-ip:1553572080
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50051
+              name: http
+              protocol: TCP

@@ -1,1 +1,0 @@
-This directory contain machine generated code from `protoc`.

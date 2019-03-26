@@ -4,8 +4,8 @@ import logging
 import grpc
 from flask import Flask, jsonify
 
-from src.web.controllers.index import bp as bp_index
-from src.web.system.exception import ServiceUnavailable
+from src.controllers.index import bp as bp_index
+from src.system.exception import ServiceUnavailable
 
 
 def create_app():
@@ -22,4 +22,4 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(host="0.0.0.0", port=os.getenv("PORT"), debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

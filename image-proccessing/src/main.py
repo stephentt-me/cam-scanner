@@ -6,13 +6,13 @@ import grpc
 
 import cv2
 
-from src.proto.ImageProcessRequest_pb2_grpc import (
+from proto.ImageProcessRequest_pb2_grpc import (
     ImageProcessingServicer,
     add_ImageProcessingServicer_to_server,
 )
-from src.proto.ImageProcessRequest_pb2 import Image
-import src.image_processing.processing as processing
-from src.image_processing.hearbeat import make_heartbeat
+from proto.ImageProcessRequest_pb2 import Image
+import src.processing as processing
+# from src.hearbeat import make_heartbeat
 
 SERVER_PORT = "[::]:50051"
 
@@ -34,7 +34,7 @@ def serve():
     server.start()
     try:
         while True:
-            make_heartbeat(SERVER_PORT)
+            # make_heartbeat(SERVER_PORT)
             time.sleep(3)
     except KeyboardInterrupt:
         server.stop(0)
