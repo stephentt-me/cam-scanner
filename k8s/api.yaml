@@ -1,4 +1,3 @@
-# cam-scanner-api-service.default.svc.cluster.local
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,7 +28,7 @@ spec:
     spec:
       containers:
         - name: cam-scanner-api
-          image: asia.gcr.io/stephen-f52d1/cs-api:1553580267
+          image: asia.gcr.io/stephen-f52d1/cs-api
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
