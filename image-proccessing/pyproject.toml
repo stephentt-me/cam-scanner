@@ -2,7 +2,7 @@
 name = "image-proccessing"
 version = "0.1.0"
 description = ""
-authors = ["Stephen Truong Trung Hieu <trunghieu.truong.bit@gmail.com>"]
+authors = []
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -14,6 +14,8 @@ python-dotenv = "^0.10.1"
 grpcio-reflection = "^1.19"
 
 [tool.poetry.dev-dependencies]
+pylint = "^2.3"
+mypy = "^0.670.0"
 
 [build-system]
 requires = ["poetry>=0.12"]

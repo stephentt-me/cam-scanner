@@ -15,7 +15,7 @@ def load_image_from_bytes(buf):
 
 
 def image_to_buf(image):
-    return cv2.imencode('.jpg', image)[1].tobytes()
+    return cv2.imencode(".jpg", image)[1].tobytes()
 
 
 def show_image(image):
