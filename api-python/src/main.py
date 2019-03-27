@@ -1,3 +1,6 @@
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 import os
 import logging
 
@@ -15,18 +18,18 @@ def create_app():
     app.register_blueprint(bp_index)
 
     @app.after_request
-    def add_header(r):
-        """
-        Add headers to both force latest IE rendering engine or Chrome Frame,
-        and also to cache the rendered page for 10 minutes.
+    def nocache_header(r):
+        """Support add no cache header to response data
         """
         r.headers["Pragma"] = "no-cache"
         r.headers["Expires"] = "0"
-        r.headers['Cache-Control'] = "no-cache, no-store, must-revalidate, public, max-age=0"
+        r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, public, max-age=0"
         return r
 
     @app.errorhandler(ServiceUnavailable)
     def service_unavailable_handle(e):
+        """Exception hanlder when an external service not available
+        """
         return jsonify({"success": False, "message": "Service unavailable."}) , 400
     return app
 
